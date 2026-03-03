@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARAKA EMMANUEL · FORGED IN SYSTEMS</title>
+    <!-- advanced font stack & real‑time feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0d10;
+            color: #e3e9f2;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 400;
+            counter-reset: heading;
+        }
+
+        /* real‑time scanner line / ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00ffb2, #3b82f6, #a855f7, transparent);
+            z-index: 1000;
+            animation: scanPulse 3s infinite ease-in-out;
+            opacity: 0.8;
+            box-shadow: 0 0 20px #00ffb2;
+        }
+
+        @keyframes scanPulse {
+            0% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(2px); }
+            100% { opacity: 0.4; transform: translateY(0); }
+        }
+
+        /* complex grid overlay */
+        #cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 178, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 178, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* main cinematic container */
+        .cathedral {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem 8rem;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(0px);
+        }
+
+        /* time‑stamp live indicator */
+        .live-context {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0, 255, 178, 0.25);
+            padding-bottom: 1.25rem;
+            margin-bottom: 3rem;
+            color: #9ab9e0;
+            letter-spacing: 1px;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .live-clock {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .live-clock span {
+            background: #1a262e;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #2c4b5a;
+            box-shadow: 0 0 8px rgba(0,255,200,0.2);
+        }
+
+        .status-pulse {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ffb2;
+            border-radius: 50%;
+            box-shadow: 0 0 18px #00ffb2;
+            animation: pulseDot 1.5s infinite;
+        }
+        @keyframes pulseDot { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+
+        /* hero section with image embed (first photo) */
+        .hero-origin {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+            align-items: center;
+            background: linear-gradient(145deg, #11161e, #0a0f17);
+            border-radius: 48px;
+            padding: 2.5rem;
+            border: 1px solid #2c4050;
+            box-shadow: 0 20px 40px -15px black;
+        }
+
+        .hero-image-panel {
+            flex: 1 1 280px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 2px solid #2f4b5c;
+            transition: all 0.3s;
+            background: #000;
+        }
+        .hero-image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(30%) contrast(1.2);
+            mix-blend-mode: luminosity;
+            transition: transform 0.5s;
+        }
+        .hero-image-panel img:hover {
+            transform: scale(1.02);
+            filter: grayscale(0%) contrast(1.4);
+        }
+        .hero-text {
+            flex: 2 1 400px;
+        }
+        .hero-text h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(130deg, #fff, #b0f0ff, #00ffb2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            animation: glowPulse 4s infinite;
+        }
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 10px rgba(0,255,178,0.2); }
+            50% { text-shadow: 0 0 30px rgba(0,255,178,0.6); }
+            100% { text-shadow: 0 0 10px rgba(0,255,178,0.2); }
+        }
+        .hero-sub {
+            font-size: 1.4rem;
+            font-weight: 300;
+            border-left: 5px solid #00ffb2;
+            padding-left: 1.8rem;
+            background: rgba(0,255,178,0.05);
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* image grid for location shots */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
+        }
+
+        .location-card {
+            background: rgba(20, 30, 40, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #2e4958;
+            border-radius: 36px;
+            padding: 1.8rem;
+            transition: all 0.3s;
+        }
+        .location-card:hover {
+            transform: translateY(-8px);
+            border-color: #00ffb2;
+            box-shadow: 0 20px 40px -15px #00ffb233;
+        }
+        .location-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 24px;
+            margin-bottom: 1.2rem;
+            border: 2px solid #3f5e70;
+            filter: brightness(0.9) contrast(1.1);
+            transition: 0.5s;
+        }
+        .location-card img:hover {
+            filter: brightness(1.05) contrast(1.2);
+        }
+
+        /* adidas championship image — embedded in timeline */
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.8rem;
+            margin: 5rem 0;
+        }
+
+        .timeline-item {
+            grid-column: span 6;
+            background: rgba(20, 30, 40, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid #2e4958;
+            border-radius: 36px;
+            padding: 2.2rem;
+            transition: all 0.2s;
+            box-shadow: 0 10px 30px -20px black;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            border-color: #00ffb2;
+            box-shadow: 0 20px 40px -15px #00ffb233;
+        }
+
+        .timeline-item.span-all {
+            grid-column: 1 / -1;
+        }
+
+        .image-embed {
+            margin: 1.5rem 0 0.5rem;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 2px solid #3f5e70;
+            background: #10171e;
+        }
+        .image-embed img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(0.95) contrast(1.1);
+            transition: 1s;
+        }
+        .image-embed img:hover {
+            filter: brightness(1.05) contrast(1.2);
+            transform: scale(1.01);
+        }
+
+        .footnote-chip {
+            font-family: 'Space Mono', monospace;
+            background: #1b2a33;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            border: 1px solid #00a6a6;
+            transition: 0.3s;
+        }
+        .footnote-chip:hover {
+            background: #2a4a5a;
+            border-color: #00ffb2;
+        }
+
+        /* GOD'S WILL section with intricate layout */
+        .will-section {
+            background: #0e1a24;
+            background-image: radial-gradient(circle at 20% 30%, #1b3c4a 0%, transparent 30%);
+            border-radius: 60px;
+            padding: 3.5rem;
+            margin: 5rem 0;
+            border: 1px solid #356277;
+            box-shadow: inset 0 0 30px rgba(0,255,200,0.1), 0 30px 50px -30px #000;
+        }
+
+        .will-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .will-card {
+            background: rgba(8, 20, 28, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 2rem;
+            border: 1px solid #386277;
+            transition: 0.2s;
+        }
+        .will-card:hover {
+            border-color: #00ffb2;
+            box-shadow: 0 0 30px rgba(0,255,178,0.1);
+        }
+        .will-card.large {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .will-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ccf5ff, #b5ffcf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .spirit-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .role-tag {
+            background: #08212b;
+            border: 1px solid #2b8a7c;
+            border-radius: 60px;
+            padding: 0.4rem 1.6rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #9cffea;
+            transition: 0.3s;
+        }
+        .role-tag:hover {
+            background: #1a4a5a;
+            border-color: #00ffb2;
+            transform: scale(1.05);
+        }
+
+        /* family tree / matrix */
+        .family-matrix {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            justify-content: center;
+            background: #10232e;
+            border-radius: 48px;
+            padding: 2.5rem;
+        }
+        .sibling-group {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .sibling {
+            background: #1f3a48;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            border: 2px solid #00ccaa;
+            box-shadow: 0 0 20px #00ffb25a;
+            transition: 0.3s;
+        }
+        .sibling:hover {
+            transform: scale(1.1);
+            border-color: #00ffb2;
+            box-shadow: 0 0 30px #00ffb2;
+        }
+
+        /* quantitative automation blocks */
+        .code-panel {
+            background: #0c1c26;
+            border-left: 6px solid #00ffb2;
+            padding: 2rem;
+            font-family: 'Space Mono', monospace;
+            border-radius: 30px;
+            box-shadow: 0 0 60px rgba(0,255,178,0.2);
+            margin: 3rem 0;
+            animation: glowBox 3s infinite;
+        }
+        @keyframes glowBox {
+            0% { box-shadow: 0 0 40px rgba(0,255,178,0.1); }
+            50% { box-shadow: 0 0 80px rgba(0,255,178,0.3); }
+            100% { box-shadow: 0 0 40px rgba(0,255,178,0.1); }
+        }
+        .code-line {
+            display: block;
+            color: #b2ffe0;
+            font-size: 0.95rem;
+        }
+        .code-line::before {
+            content: '>>> ';
+            color: #ffb86b;
+        }
+
+        /* real‑time stats ticker */
+        .stats-ticker {
+            width: 100%;
+            overflow: hidden;
+            background: #07131c;
+            border-radius: 40px;
+            padding: 1rem 0;
+            border: 1px solid #2f6767;
+            margin: 4rem 0;
+        }
+        .ticker-track {
+            display: flex;
+            gap: 3rem;
+            animation: tickerScroll 22s infinite linear;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+        .ticker-track span {
+            padding: 0 1rem;
+            background: #0f2e38;
+            border-radius: 60px;
+            color: #a9f5e3;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* footer & final line */
+        .signature {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(145deg, #00ffb2, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            border-top: 1px solid #276b6b;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            animation: signaturePulse 3s infinite;
+        }
+        @keyframes signaturePulse {
+            0% { opacity: 0.8; letter-spacing: 6px; }
+            50% { opacity: 1; letter-spacing: 10px; }
+            100% { opacity: 0.8; letter-spacing: 6px; }
+        }
+
+        /* loading bar */
+        .loading-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00ffb2, #3b82f6, #a855f7);
+            width: 0%;
+            animation: loadProgress 10s infinite;
+            z-index: 2000;
+        }
+        @keyframes loadProgress {
+            0% { width: 0%; opacity: 1; }
+            50% { width: 70%; opacity: 0.8; }
+            100% { width: 100%; opacity: 0; }
+        }
+
+        /* adaptive */
+        @media (max-width: 800px) {
+            .will-grid { grid-template-columns: 1fr; }
+            .will-card.large { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .timeline-item { grid-column: span 12; }
+            .live-context { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (max-width: 480px) {
+            .cathedral { padding: 1.5rem; }
+            .hero-origin { padding: 1.5rem; }
+            .hero-text h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="cyber-grid"></div>
+    <div class="loading-bar"></div>
+
+    <div class="cathedral">
+
+        <!-- live status / realtime meta -->
+        <div class="live-context">
+            <div class="live-clock">
+                <span>📸 IMG-20260222-WA0005</span>
+                <span>📍 JUBA · KAMPALA</span>
+                <span>⏱️ <span id="liveTimestamp"></span></span>
+                <span>⚡ HYBRID IMAGE ENGINE</span>
+            </div>
+            <div class="status-pulse">
+                <span class="pulse-dot"></span>
+                <span>REAL‑TIME · YOUR IMAGES + RESEARCH</span>
+            </div>
+        </div>
+
+        <!-- HERO: first image (will show YOUR REDMI photo if available) -->
+        <div class="hero-origin">
+            <div class="hero-image-panel" id="hero-image-container">
+                <img id="hero-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%2311222b'/%3E%3Ctext x='60' y='200' font-family='Arial' font-size='48' fill='%2300ffb2' font-weight='bold'%3EREDMI Note 13%3C/text%3E%3Ctext x='60' y='300' font-family='Arial' font-size='36' fill='%23aaccdd'%3E21/02/2026 14:53%3C/text%3E%3Ctext x='60' y='420' font-family='Arial' font-size='24' fill='%2399bbcc'%3EFIRST LIGHT · SOUTH SUDAN BORN%3C/text%3E%3C/svg%3E"
+                     alt="REDMI Note 13 timestamp">
+            </div>
+            <div class="hero-text">
+                <h1>BARAKA EMMANUEL</h1>
+                <div class="hero-sub">Born in Conflict · Raised in Constraint · Built for Systems</div>
+                <p style="margin-top: 2rem; color: #cbd5e1; font-size: 1.2rem;">South Sudan root — Ugandan soil — global markets. This is a living archive of a system engineer forged in displacement and code.</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <span class="footnote-chip">👤 Adda Thomas – discipline</span>
+                    <span class="footnote-chip">👤 Elizabeth Thomas – stability</span>
+                    <span class="footnote-chip">🔧 persistence under pressure</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCATION IMAGES: Auto-researched online images + YOUR photos -->
+        <div class="location-grid" id="location-grid">
+            <!-- South Sudan - will be replaced with YOUR photo if available -->
+            <div class="location-card" id="south-sudan-card">
+                <img id="south-sudan-img" class="dynamic-image" data-personal="images/south-sudan.jpg" data-fallback="https://media.defense.gov/2021/Nov/19/2002896215/2000/2000/0/211111-F-YV189-1002.JPG" 
+                     src="https://media.defense.gov/2021/Nov/19/2002896215/2000/2000/0/211111-F-YV189-1002.JPG" 
+                     alt="South Sudan landscape" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%231d3a44\'/%3E%3Ctext x=\'50\' y=\'200\' font-family=\'Arial\' font-size=\'30\' fill=\'%2300ffb2\'%3ESouth Sudan%3C/text%3E%3C/svg%3E'">
+                <h3>🇸🇸 South Sudan · Origin</h3>
+                <p>Born in conflict, shaped by resilience. South Sudanese heritage runs deep.</p>
+                <span class="footnote-chip">Juba · Wau · Bor</span>
+            </div>
+
+            <!-- Kampala - will be replaced with YOUR photo if available -->
+            <div class="location-card" id="kampala-card">
+                <img id="kampala-img" class="dynamic-image" data-personal="images/kampala.jpg" data-fallback="https://www.usaid.gov/sites/default/files/styles/promo_thumbnail/public/2024-08/Kampala%20City%20View.jpg" 
+                     src="https://www.usaid.gov/sites/default/files/styles/promo_thumbnail/public/2024-08/Kampala%20City%20View.jpg" 
+                     alt="Kampala city view" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%232a4d5a\'/%3E%3Ctext x=\'50\' y=\'200\' font-family=\'Arial\' font-size=\'30\' fill=\'%2300ffb2\'%3EKampala Uganda%3C/text%3E%3C/svg%3E'">
+                <h3>🇺🇬 Kampala · Upbringing</h3>
+                <p>Urban life, digital expansion, and the crucible of adaptation.</p>
+                <span class="footnote-chip">markets · streets · energy</span>
+            </div>
+
+            <!-- Dorah Bloch International School - will use YOUR photo -->
+            <div class="location-card" id="dorah-card">
+                <img id="dorah-img" class="dynamic-image" data-personal="images/dorah-bloch.jpg" data-fallback="https://www.unhcr.org/afr/wp-content/uploads/sites/38/2023/02/Kiryandongo-secondary-school-students-1.jpg" 
+                     src="https://www.unhcr.org/afr/wp-content/uploads/sites/38/2023/02/Kiryandongo-secondary-school-students-1.jpg" 
+                     alt="School in Uganda" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%233a5f6b\'/%3E%3Ctext x=\'50\' y=\'200\' font-family=\'Arial\' font-size=\'30\' fill=\'%2300ffb2\'%3EDorah Bloch%3C/text%3E%3C/svg%3E'">
+                <h3>🏫 Dorah Bloch International · Bweyale</h3>
+                <p>Where structured academics met international curriculum.</p>
+                <span class="footnote-chip">secondary education · systems thinking</span>
+            </div>
+
+            <!-- Trading desk - research image -->
+            <div class="location-card">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Forex trading setup" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%230d2a33\'/%3E%3Ctext x=\'50\' y=\'200\' font-family=\'Arial\' font-size=\'30\' fill=\'%2300ffb2\'%3EForex Trading%3C/text%3E%3C/svg%3E'">
+                <h3>📊 Forex · System Architecture</h3>
+                <p>Multi-monitor setups, Kalman filters, and algorithmic execution.</p>
+                <span class="footnote-chip">MetaTrader · VPS · 99% target</span>
+            </div>
+        </div>
+
+        <!-- adidas championship with YOUR photo -->
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); gap:2rem; margin:3rem 0;">
+            <div style="background:#11232e; border-radius:40px; padding:2rem;">
+                <span class="footnote-chip">⚡ 2025 · VISIBLE IDENTITY</span>
+                <h2 style="font-size:2.5rem; background: linear-gradient(135deg,#fff,#00ffb2); -webkit-background-clip:text; background-clip:text; color:transparent;">adidas · UNITED CHAMPIONSHIP</h2>
+                <div class="image-embed">
+                    <img id="adidas-image" class="dynamic-image" data-personal="images/adidas.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%231a2c34'/%3E%3Ctext x='150' y='150' font-family='Arial' font-size='70' fill='%23ffffff'%3Eadidas%3C/text%3E%3Ctext x='150' y='250' font-family='Arial' font-size='50' fill='%2300ffb2'%3EUNITED%3C/text%3E%3Ctext x='150' y='320' font-family='Arial' font-size='50' fill='%23ffdd55'%3ECHAMPIONSHIP%3C/text%3E%3C/svg%3e"
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%231a2c34'/%3E%3Ctext x='150' y='150' font-family='Arial' font-size='70' fill='%23ffffff'%3Eadidas%3C/text%3E%3Ctext x='150' y='250' font-family='Arial' font-size='50' fill='%2300ffb2'%3EUNITED%3C/text%3E%3Ctext x='150' y='320' font-family='Arial' font-size='50' fill='%23ffdd55'%3ECHAMPIONSHIP%3C/text%3E%3C/svg%3e"
+                         alt="adidas united championship" style="width:100%; border-radius:24px;">
+                </div>
+                <p>Championship mindset coded into early ambition. Dorah Bloch International School era.</p>
+            </div>
+
+            <!-- Family matrix with YOUR family photo option -->
+            <div style="background:#0e293a; border-radius:40px; padding:2rem;">
+                <span class="footnote-chip">🧬 FAMILY CODE · 7 SIBLINGS</span>
+                <div style="margin: 1rem 0;">
+                    <img id="family-image" class="dynamic-image" data-personal="images/family.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%231a3a44'/%3E%3Ctext x='50' y='120' fill='%23ffffff'%3EThomas Family%3C/text%3E%3C/svg%3E"
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%231a3a44'/%3E%3Ctext x='50' y='120' fill='%23ffffff'%3EThomas Family%3C/text%3E%3C/svg%3E"
+                         alt="Thomas family" style="width:100%; border-radius:20px; margin-bottom:1rem;">
+                </div>
+                <div class="family-matrix" style="margin-top:0;">
+                    <div class="sibling-group">
+                        <div class="sibling">JOEL</div>
+                        <div class="sibling">JACOB</div>
+                        <div class="sibling">SAMUEL</div>
+                        <div class="sibling">JOHN</div>
+                    </div>
+                    <div class="sibling-group">
+                        <div class="sibling">ROSE</div>
+                        <div class="sibling">THERESA</div>
+                        <div class="sibling">GRACE</div>
+                    </div>
+                </div>
+                <p style="margin-top:1rem;">"Competition without hatred. Independence inside unity."</p>
+            </div>
+        </div>
+
+        <!-- GOD'S WILL section with YOUR photo -->
+        <div class="will-section">
+            <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-bottom:2rem;">
+                <span style="font-size:3rem;">✝️</span>
+                <span class="footnote-chip" style="font-size:1.2rem;"># GOD'S WILL · 20260301_094332.jpg</span>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <img id="gods-will-image" class="dynamic-image" data-personal="images/gods-will.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%231d3e4a'/%3E%3Ctext x='30' y='100' fill='%23ffffff' font-size='30'%3EGOD'S%3C/text%3E%3Ctext x='30' y='160' fill='%2300ffb2' font-size='40'%3EWILL%3C/text%3E%3C/svg%3E"
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%231d3e4a'/%3E%3Ctext x='30' y='100' fill='%23ffffff' font-size='30'%3EGOD'S%3C/text%3E%3Ctext x='30' y='160' fill='%2300ffb2' font-size='40'%3EWILL%3C/text%3E%3C/svg%3E"
+                         alt="GOD'S WILL scripture" style="width:100%; border-radius:30px;">
+                </div>
+                <div>
+                    <div class="will-grid" style="margin:0;">
+                        <div class="will-card"><h3>G</h3><p>Guided by his word</p><p style="font-family:monospace;">psalms 119:105</p></div>
+                        <div class="will-card"><h3>O</h3><p>Obedience brings blessing</p><p style="font-family:monospace;">Luke 11:28</p></div>
+                        <div class="will-card"><h3>D</h3><p>Directed by the spirit</p><p style="font-family:monospace;">Romans 8:14</p></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="will-card large">
+                <div>
+                    <h4 style="font-size:2rem;">ROLES OF THE HOLY SPIRIT</h4>
+                    <div class="spirit-roles">
+                        <span class="role-tag">DIRECT</span><span class="role-tag">LEAD</span>
+                        <span class="role-tag">TEACHES</span><span class="role-tag">COMFORT</span>
+                    </div>
+                </div>
+                <div style="border-left:2px solid #306070; padding-left:2rem;">
+                    <span style="font-family:'Space Mono';">// operational framework for the unseen //</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education section with YOUR Dorah Bloch photo -->
+        <div style="display:flex; flex-wrap:wrap; gap:2rem; margin:4rem 0;">
+            <div style="flex:1; background:#11232e; border-radius:40px; padding:2rem;">
+                <span class="footnote-chip">📘 OUR LADY PRIMARY</span>
+                <span class="footnote-chip">🌍 DORAH BLOCH INTERNATIONAL · BWEYALE</span>
+                <img id="dorah-bloch-education" class="dynamic-image" data-personal="images/dorah-bloch-2.jpg" data-fallback="https://www.unhcr.org/afr/wp-content/uploads/sites/38/2023/02/Imvepi-students-2.jpg" 
+                     src="https://www.unhcr.org/afr/wp-content/uploads/sites/38/2023/02/Imvepi-students-2.jpg" 
+                     alt="School in Bweyale" style="width:100%; border-radius:24px; margin:1rem 0; max-height:200px; object-fit:cover;"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%2320455a\'/%3E%3Ctext x=\'50\' y=\'200\' fill=\'%23ffffff\'%3EDorah Bloch%3C/text%3E%3C/svg%3E'">
+                <p>"He studied systems, not grades." The structured mind began here.</p>
+            </div>
+            <div style="flex:2; background:#0e293a; border-radius:40px; padding:2rem;">
+                <span style="font-size:2rem;">⚙️ OBSESSION PHASE</span>
+                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin:1rem 0;">
+                    <span class="role-tag">KALMAN FILTERS</span>
+                    <span class="role-tag">REGIME CLASSIFICATION</span>
+                    <span class="role-tag">EXECUTION ENGINES</span>
+                    <span class="role-tag">VPS INFRASTRUCTURE</span>
+                </div>
+                <div class="code-panel" style="margin:1rem 0;">
+                    <span class="code-line">MetaTrader API · Python automation · Signal relays</span>
+                    <span class="code-line">24/7 uptime · Hedge fund-level math</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- code transition -->
+        <div class="code-panel">
+            <span class="code-line">Kalman filters · Regime classification · Multi-timeframe convergence</span>
+            <span class="code-line">Autonomous Telegram relays · Restart-on-failure · Monte Carlo robustness</span>
+            <span class="code-line" style="font-weight:bold;">[ Baraka stopped being a trader. He became a system engineer. ]</span>
+        </div>
+
+        <!-- ticker -->
+        <div class="stats-ticker">
+            <div class="ticker-track">
+                <span>⚡ 99% ACCURACY TARGET</span> <span>⚙️ MONTE CARLO</span> <span>📊 KALMAN FILTER</span>
+                <span>🇸🇸 SOUTH SUDAN ⇄ UGANDA</span> <span>🏦 INSTITUTIONAL BACKTEST</span>
+                <span>⚡ YOUR IMAGES + RESEARCH</span> <span>⚙️ HYBRID ENGINE</span> <span>📊 REAL-TIME</span>
+            </div>
+        </div>
+
+        <!-- final vision -->
+        <div style="background:#03141f; border-radius:50px; padding:3rem; border:1px solid #286268;">
+            <p style="font-size:2.2rem;">“Born in South Sudan. Raised in Uganda. <span style="color:#00ffb2;">Forged in digital markets.</span>”</p>
+            <p style="margin:2rem 0;">Not chasing luck. <span style="background:#00ffb233; padding:0.2rem 0.5rem;">Engineering inevitability.</span></p>
+            <div style="font-family:'Space Mono';">
+                <p>► multi‑asset execution frameworks · backtest clusters · latency bridges</p>
+                <p style="border-left:4px solid #ffb86b; padding-left:1rem;">Baraka Emmanuel · shaped by instability, adaptation, systems thinking</p>
+            </div>
+        </div>
+
+        <div class="signature">
+            BARAKA EMMANUEL — NOT LUCK. INEVITABILITY.
+        </div>
+    </div>
+
+    <script>
+        // Real-time Kampala timestamp
+        function updateLiveTimestamp() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: false, timeZone: 'Africa/Kampala'
+            };
+            document.getElementById('liveTimestamp').innerText = now.toLocaleString('en-US', options) + ' EAT';
+        }
+        updateLiveTimestamp();
+        setInterval(updateLiveTimestamp, 1000);
+
+        // Mouse parallax for cyber grid
+        document.addEventListener('mousemove', function(e) {
+            const grid = document.getElementById('cyber-grid');
+            if (grid) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                grid.style.backgroundPosition = `${x * 10}px ${y * 10}px, ${x * -10}px ${y * -10}px`;
+            }
+        });
+
+        // HYBRID IMAGE ENGINE: Try YOUR images first, fallback to research images
+        window.addEventListener('load', function() {
+            // Get all images with class 'dynamic-image'
+            const dynamicImages = document.querySelectorAll('.dynamic-image');
+            
+            dynamicImages.forEach(img => {
+                const personalPath = img.getAttribute('data-personal');
+                const fallbackSrc = img.getAttribute('data-fallback');
+                
+                // Try to load personal image
+                if (personalPath) {
+                    const testImg = new Image();
+                    testImg.onload = function() {
+                        // Personal image exists! Use it
+                        img.src = personalPath;
+                        console.log('✅ Loaded personal image:', personalPath);
+                    };
+                    testImg.onerror = function() {
+                        // Personal image not found, keep fallback
+                        console.log('ℹ️ Using research image for:', personalPath);
+                    };
+                    testImg.src = personalPath;
+                }
+            });
+
+            // Also handle the hero image specially (REDMI)
+            const heroImg = document.getElementById('hero-image');
+            if (heroImg) {
+                const testHero = new Image();
+                testHero.onload = function() {
+                    heroImg.src = 'images/1.jpg';
+                    console.log('✅ Loaded REDMI photo');
+                };
+                testHero.onerror = function() {
+                    console.log('ℹ️ Using default REDMI SVG');
+                };
+                testHero.src = 'images/1.jpg';
+            }
+
+            // Handle adidas image
+            const adidasImg = document.getElementById('adidas-image');
+            if (adidasImg) {
+                const testAdidas = new Image();
+                testAdidas.onload = function() {
+                    adidasImg.src = 'images/2.jpg';
+                    console.log('✅ Loaded adidas photo');
+                };
+                testAdidas.onerror = function() {
+                    console.log('ℹ️ Using default adidas SVG');
+                };
+                testAdidas.src = 'images/2.jpg';
+            }
+
+            // Handle GOD'S WILL image
+            const godsWillImg = document.getElementById('gods-will-image');
+            if (godsWillImg) {
+                const testGods = new Image();
+                testGods.onload = function() {
+                    godsWillImg.src = 'images/3.jpg';
+                    console.log('✅ Loaded GOD\'S WILL photo');
+                };
+                testGods.onerror = function() {
+                    console.log('ℹ️ Using default GOD\'S WILL SVG');
+                };
+                testGods.src = 'images/3.jpg';
+            }
+        });
+    </script>
+</body>
+</html>
